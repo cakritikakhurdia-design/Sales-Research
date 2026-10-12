@@ -7,52 +7,61 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#07152C;--line:#1D4566;--text:#FFFFFF;--muted:#9FB3C8;--accent:#17C3B2;--danger:#FF7A7A}
+  :root{--bg:#0A0A0A;--panel:#141414;--line:#2A2A2A;--text:#F5F5F5;--muted:#A3A3A3;--red:#E10600;--red-bright:#FF3B30;--red-deep:#7A0300}
   *{box-sizing:border-box}
-  body{margin:0;min-height:100vh;background:linear-gradient(135deg,#07152C 0%,#0B1E3D 60%,#0F4A5C 100%);
-       color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.55}
-  main{max-width:1150px;margin:0 auto;padding:48px 24px 64px}
+  body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.55}
+  body::before{content:"";position:fixed;inset:0 0 auto 0;height:6px;background:var(--red);z-index:1}
+  main{max-width:1150px;margin:0 auto;padding:56px 24px 64px}
   h1,h2,h3{font-family:"Space Grotesk",Arial,sans-serif;margin:0}
-  header h1{font-size:clamp(32px,5vw,48px);line-height:1.1}
-  header p{color:var(--muted);margin:12px 0 0;max-width:60ch}
-  form{display:flex;gap:12px;margin-top:32px;max-width:720px}
-  input{flex:1;min-width:0;background:var(--bg);color:var(--text);border:1px solid var(--line);padding:14px 16px;font:inherit}
-  input:focus{outline:2px solid var(--accent);outline-offset:-1px}
-  button{padding:14px 22px;border:0;background:var(--accent);color:var(--bg);font-family:"Space Grotesk",Arial,sans-serif;
-         font-weight:700;font-size:16px;cursor:pointer;white-space:nowrap}
+  header h1{font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-.01em}
+  header h1 span{color:var(--red)}
+  header p{color:var(--muted);margin:14px 0 0;max-width:60ch}
+  form{display:flex;gap:0;margin-top:32px;max-width:720px;border:2px solid var(--red)}
+  input{flex:1;min-width:0;background:var(--bg);color:var(--text);border:0;padding:14px 16px;font:inherit}
+  input::placeholder{color:#6B6B6B}
+  input:focus{outline:none;background:#111}
+  button{padding:14px 26px;border:0;background:var(--red);color:#FFF;font-family:"Space Grotesk",Arial,sans-serif;
+         font-weight:700;font-size:16px;letter-spacing:.02em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+  button:hover{background:var(--red-bright)}
   button:disabled{opacity:.5;cursor:wait}
-  .status{min-height:24px;margin-top:12px;font-size:14px;color:var(--muted)}
-  .status.error{color:var(--danger)}
+  .status{min-height:24px;margin-top:12px;font-size:14px;color:var(--muted);max-width:720px}
+  .status.error{color:#FFF;background:var(--red-deep);border-left:4px solid var(--red-bright);padding:10px 14px}
+  .status.error::before{content:"⚠  "}
   .grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;margin-top:24px}
   @media (max-width:820px){.grid{grid-template-columns:1fr}}
-  aside,article{background:rgba(255,255,255,.05);padding:24px}
-  aside h2{font-size:16px;margin-bottom:12px;color:var(--muted);font-weight:500}
+  aside,article{background:var(--panel);border:1px solid var(--line);padding:24px}
+  article{border-top:3px solid var(--red)}
+  aside h2{font-size:13px;margin-bottom:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.08em}
   aside ul{list-style:none;margin:0;padding:0}
-  aside li button{all:unset;display:block;width:100%;padding:8px 0;cursor:pointer;border-top:1px solid var(--line);font-size:15px}
+  aside li button{all:unset;display:block;width:100%;padding:8px 0 8px 10px;cursor:pointer;border-top:1px solid var(--line);
+                  border-left:3px solid transparent;font-size:15px;color:var(--text)}
   aside li:first-child button{border-top:0}
-  aside li button:hover,aside li button.active{color:var(--accent)}
+  aside li button:hover{color:var(--red-bright)}
+  aside li button.active{color:var(--red-bright);border-left-color:var(--red)}
   aside small{display:block;color:var(--muted);font-size:12px}
   article h2{font-size:30px}
   .lead{color:var(--muted);margin:6px 0 20px;max-width:70ch}
   .facts{display:flex;flex-wrap:wrap;gap:8px 24px;font-size:14px;color:var(--muted);margin-bottom:8px}
-  .facts b{color:var(--text);font-weight:500}
+  .facts b{color:var(--red-bright);font-weight:500;margin-right:4px}
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:8px 32px}
   @media (max-width:640px){.cols{grid-template-columns:1fr}}
-  h3{font-size:16px;color:var(--accent);margin:22px 0 6px}
+  h3{font-size:14px;color:var(--red-bright);margin:22px 0 6px;text-transform:uppercase;letter-spacing:.06em}
   article ul{margin:0;padding-left:18px}
   article li{margin:4px 0}
-  .opener{margin-top:24px;padding:18px 20px;background:var(--accent);color:var(--bg)}
-  .opener h3{color:var(--bg);margin:0 0 4px}
+  article li::marker{color:var(--red)}
+  .opener{margin-top:24px;padding:18px 20px;background:var(--red);color:#FFF}
+  .opener h3{color:#FFF;margin:0 0 4px;opacity:.85}
   .sources a{color:var(--muted);font-size:13px;word-break:break-word}
+  .sources a:hover{color:var(--red-bright)}
   .note{color:var(--muted);font-size:13px;margin-top:20px}
   .empty{color:var(--muted)}
-  footer{margin-top:40px;color:var(--muted);font-size:13px}
+  footer{margin-top:40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
 </style>
 </head>
 <body>
 <main>
   <header>
-    <h1>Sales Research</h1>
+    <h1>Sales Research<span>.</span></h1>
     <p>Type a company name. Gemini researches it on the live web and writes a one page brief. Every brief is saved, so the whole team can open it later.</p>
   </header>
 
@@ -84,6 +93,17 @@ function setStatus(msg, isError = false) {
   $('status').className = 'status' + (isError ? ' error' : '');
 }
 
+// Read the server reply. If it is not JSON (for example Vercel's 404 page), explain what went wrong in plain words.
+async function readJson(res) {
+  const text = await res.text();
+  try { return JSON.parse(text); }
+  catch {
+    if (res.status === 404) throw new Error('Server returned 404: the API is not deployed. Check that research.js is inside the api folder on GitHub.');
+    if (res.status === 504 || /TIMEOUT/i.test(text)) throw new Error('The research took too long and timed out. Try again.');
+    throw new Error(`Server returned ${res.status} with an unexpected reply. Check the Vercel logs.`);
+  }
+}
+
 function showBrief(row) {
   activeId = row.id;
   const b = row.brief || {};
@@ -112,19 +132,22 @@ function showBrief(row) {
 async function loadHistory() {
   try {
     const res = await fetch('/api/research');
-    const rows = await res.json();
+    const rows = await readJson(res);
     if (!res.ok) throw new Error(rows.error);
     $('history').innerHTML = rows.length
       ? rows.map(r => `<li><button data-id="${r.id}" class="${r.id === activeId ? 'active' : ''}">${esc(r.company)}<small>${new Date(r.created_at).toLocaleDateString()}</small></button></li>`).join('')
       : '<li class="empty">Nothing yet.</li>';
-  } catch (e) { setStatus(e.message, true); $('history').innerHTML = ''; }
+  } catch (e) { setStatus(e.message, true); $('history').innerHTML = '<li class="empty">Could not load.</li>'; }
 }
 
 $('history').addEventListener('click', async e => {
   const btn = e.target.closest('button'); if (!btn) return;
-  const res = await fetch(`/api/research?id=${btn.dataset.id}`);
-  const row = await res.json();
-  if (row) showBrief(row);
+  try {
+    const res = await fetch(`/api/research?id=${btn.dataset.id}`);
+    const row = await readJson(res);
+    if (!res.ok) throw new Error(row.error);
+    if (row) { setStatus(''); showBrief(row); }
+  } catch (err) { setStatus(err.message, true); }
 });
 
 $('form').addEventListener('submit', async e => {
@@ -137,7 +160,7 @@ $('form').addEventListener('submit', async e => {
     const res = await fetch('/api/research', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ company })
     });
-    const row = await res.json();
+    const row = await readJson(res);
     if (!res.ok) throw new Error(row.error);
     setStatus('Done. Brief saved for the team.');
     $('company').value = '';
